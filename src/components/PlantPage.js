@@ -16,11 +16,18 @@ function PlantPage() {
     setPlants(plants => [newPlant, ...plants])
   }
 
+  const [searchTerm, setSearchTerm] = useState('')
+  const updateSearch = (newSearchTerm) => {
+    setSearchTerm(newSearchTerm)
+  }
+
+  const filteredPlants = plants.filter(plant => plant.name.toLowerCase().includes(searchTerm.toLowerCase()))
+
   return (
     <main>
       <NewPlantForm addPlant={addPlant} />
-      <Search />
-      <PlantList plants={plants} />
+      <Search updateSearch={updateSearch} />
+      <PlantList plants={filteredPlants} />
     </main>
   );
 }
